@@ -1,0 +1,25 @@
+{
+  "name": "EmployeeTracke",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liztozireland/EmployeeTracke.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liztozireland/EmployeeTracke/issues"
+  },
+  "homepage": "https://github.com/liztozireland/EmployeeTracke#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3"
+  }
+}
