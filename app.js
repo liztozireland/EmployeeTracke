@@ -16,7 +16,7 @@ const db = mysql.createConnection(
   );
   db.connect (err => {
       if (err) throw err
-      promptUser();
+      console.log("farts");
   })
   // Query database
 //   db.query('SELECT * FROM students', function (err, results) {
@@ -29,9 +29,31 @@ const db = mysql.createConnection(
               type: "list",
               message: "What do you want to do?",
               name: "option",
-              choices: ["view all departments","view all roles","view all employees", "add a department", "add a role", "add an employee", "update an employee role"]
+              choices: [ 
+                "view all departments",
+                "view all roles",
+                "view all employees", 
+                "add a department", 
+                "add a role", 
+                "add an employee", 
+                "update an employee role"]
           }
       ]) .then (function(data){
         console.log(data)
       })
   }
+
+  function viewAllDepartments () {
+    console.log("All Departments")
+    connection.promise().query("SELECT id, name FROM department;")
+        .then(result => {
+            console.table(result[0]);
+            mainMenu();
+        })
+  }
+
+  function allQuestions () {
+    promptUser()
+    
+  }
+  allQuestions ();
