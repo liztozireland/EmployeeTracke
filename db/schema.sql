@@ -20,6 +20,7 @@ CREATE TABLE employee (
   last_name VARCHAR(30) NOT NULL,
   role_id INT NOT NULL,
   manager_id INT, 
+  department_id INT,
   FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE,
   FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE CASCADE
 );
