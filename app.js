@@ -104,17 +104,43 @@ function allQuestions() {
       return allQuestions();
     });
   }
+  function addNewDepartment () {
+    console.log("Add a new department meow");
+    inquirer.prompt([
+      {
+          name: "name",
+          message: "What is the name of the department?"
+      }
+  ]).then(input => {
+      let name = input;
+      db.query("INSERT INTO department (name) SET ?", [[name.name]], () => {
+        allQuestions()
+    })
+})
+}
   function addNewRole () {
     console.log("Add a new meow");
-    db.query(`SELECT first_name, last_name ​FROM employee`, (err, results) => {
-      if (err) {
-        console.log({ error: err.message });
-        return;
+    inquirer.prompt([
+      {
+          name: "name",
+          message: "What is the name of the role?"
+      },
+      {
+          name: "salary",
+          message: "What is the salary of the role?"
+      },
+      {
+          name: "department_id",
+          message: "What is the department id of the role?"
       }
-      console.table(results);
-      return allQuestions();
-    });
-  }
+  ]).then(input => {
+      let title = input;
+      console.log(title);
+      db.query("INSERT INTO role (title, salary, department_id) VALUES ?", [[title.name, parseInt(title.salary), parseInt(title.department_id)]], () => {
+          allQuestions()
+      })
+  })
+}
   function addNewEmployee () {
     console.log("meowww meow meow");
     db.query(`SELECT first_name, last_name ​FROM employee`, (err, results) => {
