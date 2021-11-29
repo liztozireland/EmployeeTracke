@@ -33,7 +33,6 @@ menu = [
       "Add a Department?",
       "Add a Role?",
       "Add an Employee?",
-      "Update an Employee",
       "Exit the Database",
     ],
   },
@@ -143,15 +142,30 @@ function allQuestions() {
 }
   function addNewEmployee () {
     console.log("meowww meow meow");
-    db.query(`SELECT first_name, last_name ​FROM employee`, (err, results) => {
-      if (err) {
-        console.log({ error: err.message });
-        return;
+    inquirer.prompt([
+      {
+          name: "name",
+          message: "What is the employee's first name?"
+      },
+      {
+          name: "last",
+          message: "What is theemployee's last name?"
+      },
+      {
+          name: "role_id",
+          message: "What is the employee's role id?"
+      },
+      {
+          name: "manager_id",
+          message: "What is the employee's manager id?"
       }
-      console.table(results);
-      return allQuestions();
-    });
-  }
+  ]).then(input => {
+      let name = input;
+      db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ?", [[name.name, name.last, parseInt(name.role_id), parseInt(name.maneger_id)]], () => {
+          allQuestions()
+      })
+  })
+}
   function quit() {
     console.log("exiting...done.")
     process.exit();
