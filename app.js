@@ -71,7 +71,7 @@ function allQuestions() {
   });
     function viewAllDepartments() {
       console.log("Here They Are");
-      db.query(`SELECT * ​FROM department`, (err, results) => {
+      db.query('SELECT * FROM department', (err, results) => {
         if (err) {
           console.log({ error: err.message });
           return;
@@ -83,7 +83,7 @@ function allQuestions() {
 
   function viewAllRoles () {
     console.log("Where They Are");
-    db.query(`SELECT role_id FROM employee`, (err, results) => {
+    db.query(`SELECT * FROM role`, (err, results) => {
       if (err) {
         console.log({ error: err.message });
         return;
@@ -94,7 +94,7 @@ function allQuestions() {
   }
   function viewAllEmployees () {
     console.log("Who Are They");
-    db.query(`SELECT first_name, last_name ​FROM employee`, (err, results) => {
+    db.query(`SELECT * FROM employee`, (err, results) => {
       if (err) {
         console.log({ error: err.message });
         return;
