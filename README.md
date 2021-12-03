@@ -1,5 +1,5 @@
 # A Great Employee Management System
-
+Video: https://watch.screencastify.com/v/I6u3oeqZAWYl3qirHpoM
 
 ## Description 
 This project was made to help employers keep track of their employees
