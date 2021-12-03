@@ -17,7 +17,6 @@ const db = mysql.createConnection(
 );
 db.connect((err) => {
   if (err) throw err;
-  console.log("farts");
   allQuestions();
 });
 
@@ -43,7 +42,6 @@ const promptUser = () => {
 };
 
 function allQuestions() {
-  console.log("shit");
   promptUser().then((response) => {
     switch (response.answer) {
       case "View All Departments":
@@ -70,7 +68,6 @@ function allQuestions() {
     }
   });
     function viewAllDepartments() {
-      console.log("Here They Are");
       db.query('SELECT * FROM department', (err, results) => {
         if (err) {
           console.log({ error: err.message });
@@ -82,7 +79,6 @@ function allQuestions() {
     }
 
   function viewAllRoles () {
-    console.log("Where They Are");
     db.query(`SELECT * FROM role`, (err, results) => {
       if (err) {
         console.log({ error: err.message });
@@ -93,7 +89,6 @@ function allQuestions() {
     });
   }
   function viewAllEmployees () {
-    console.log("Who Are They");
     db.query(`SELECT * FROM employee`, (err, results) => {
       if (err) {
         console.log({ error: err.message });
@@ -104,7 +99,6 @@ function allQuestions() {
     });
   }
   function addNewDepartment () {
-    console.log("Add a new department meow");
     inquirer.prompt([
       {
           name: "name",
@@ -112,36 +106,36 @@ function allQuestions() {
       }
   ]).then(input => {
       let name = input;
-      db.query("INSERT INTO department (name) SET ?", [[name.name]], () => {
+      db.query(`INSERT INTO department SET ?`, name, (err, res) => {
+        if (err) throw err;
+        console.log(res)
+        console.log(name)
         allQuestions()
     })
 })
 }
   function addNewRole () {
-    console.log("Add a new meow");
     inquirer.prompt([
       {
           name: "name",
           message: "What is the name of the role?"
       },
       {
-          name: "salary",
-          message: "What is the salary of the role?"
-      },
-      {
-          name: "department_id",
-          message: "What is the department id of the role?"
-      }
+        name: "salary",
+        message: "What is the salary of the role?"
+    }
   ]).then(input => {
-      let title = input;
-      console.log(title);
-      db.query("INSERT INTO role (title, salary, department_id) VALUES ?", [[title.name, parseInt(title.salary), parseInt(title.department_id)]], () => {
+      let name = input;
+      console.log(name);
+      db.query('INSERT INTO role (title, salary) VALUES ?', [[name.name, parseInt(name.salary)]], (err, res) => {
+          if (err) throw err;
+          console.log(res)
+          console.log(name)
           allQuestions()
       })
   })
 }
   function addNewEmployee () {
-    console.log("meowww meow meow");
     inquirer.prompt([
       {
           name: "name",
@@ -149,7 +143,7 @@ function allQuestions() {
       },
       {
           name: "last",
-          message: "What is theemployee's last name?"
+          message: "What is the employee's last name?"
       },
       {
           name: "role_id",
@@ -161,8 +155,11 @@ function allQuestions() {
       }
   ]).then(input => {
       let name = input;
-      db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ?", [[name.name, name.last, parseInt(name.role_id), parseInt(name.maneger_id)]], () => {
-          allQuestions()
+      db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ?`, [[name.name, name.last, parseInt(name.role_id), parseInt(name.manager_id)]], (err, res) => {
+        if (err) throw err;
+        console.log(res)
+        console.log(name)
+        allQuestions()
       })
   })
 }
